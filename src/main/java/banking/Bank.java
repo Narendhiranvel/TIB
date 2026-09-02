@@ -38,7 +38,7 @@ public class Bank {
 
         String accountNumber = String.valueOf(++accountCounter);
 
-        Account account = new Account(accountNumber, accountType, openingBalance);
+        Account account = new Account(accountNumber, accountType, openingBalance, AccountStatus.ACTIVE);
 
         accounts.add(account);
 
@@ -78,7 +78,6 @@ public class Bank {
 
             customer.viewProfile();
             System.out.println("-------------------------");
-
         }
     }
 
@@ -90,15 +89,12 @@ public class Bank {
         Account account = findAccount(accountNumber);
 
         if (account == null) {
-
             System.out.println("Account not found.");
             return;
-
         }
 
         account.setStatus(AccountStatus.CLOSED);
 
         System.out.println("Account closed successfully.");
-
     }
 }

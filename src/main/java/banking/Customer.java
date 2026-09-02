@@ -1,6 +1,5 @@
 package banking;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,6 @@ public class Customer {
     private Address address;
 
     private List<Account> accounts;
-
 
     public Customer(String name,
                     LocalDate dateOfBirth,
@@ -40,7 +38,6 @@ public class Customer {
 
     }
 
-
     public void updateProfile(String name,
                               String phone,
                               String email,
@@ -52,7 +49,6 @@ public class Customer {
         this.address = address;
 
     }
-
 
     public void viewProfile() {
 
@@ -66,27 +62,17 @@ public class Customer {
         System.out.println("Accounts:");
 
         for (Account account : accounts) {
-
-            System.out.println("Account Number: " + account.getAccountNumber() +
-                    "\n" + "Account Status: " + account.getStatus());
-
+            System.out.println("Account Details");
+            account.viewAccountDetails();
         }
     }
 
 
     public int getCustomerId() {
-
         return customerId;
-
     }
 
-    public void addAccount(Account e){
+    public void addAccount(Account e) {
         accounts.add(e);
-    }
-
-    public List<Account> getAccounts() {
-
-        return accounts;
-
     }
 }

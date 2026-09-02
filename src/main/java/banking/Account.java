@@ -10,12 +10,12 @@ public class Account {
     private AccountStatus status;
 
 
-    public Account(String accountNumber, AccountType accountType, BigDecimal balance) {
+    public Account(String accountNumber, AccountType accountType, BigDecimal balance, AccountStatus accountStatus) {
 
         this.accountNumber = accountNumber;
         this.accountType = accountType;
         this.balance = balance;
-        this.status = AccountStatus.ACTIVE;
+        this.status = accountStatus;
     }
 
 
@@ -37,7 +37,6 @@ public class Account {
             return;
         }
 
-
         if (amount.compareTo(balance) > 0) {
             System.out.println("Insufficient balance");
             return;
@@ -48,36 +47,25 @@ public class Account {
 
 
     public BigDecimal checkBalance() {
-
         return this.balance;
-
     }
 
+    public void viewAccountDetails() {
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Account Type: " + accountType);
+        System.out.println("Balance: " + balance);
+        System.out.println("Status: " + status);
+    }
 
     public String getAccountNumber() {
-
         return accountNumber;
-
     }
-
-
-    public AccountStatus getStatus() {
-
-        return status;
-
-    }
-
 
     public void setStatus(AccountStatus status) {
-
         this.status = status;
-
     }
 
-
-    public AccountType getAccountType() {
-
-        return accountType;
-
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 }
