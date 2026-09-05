@@ -48,5 +48,19 @@ public class Main {
         System.out.println(
                 account.checkBalance()
         );
+
+        bank.closeAccount(account.getAccountNumber());
+
+//        Can't deposit after closing
+        account.depositAmount(
+                new BigDecimal("1000")
+        );
+
+//        Can't withdraw after closing
+        account.withdrawAmount(
+                new BigDecimal("500")
+        );
+
+        customer.viewProfile();
     }
 }

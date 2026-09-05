@@ -18,8 +18,16 @@ public class Account {
         this.status = accountStatus;
     }
 
+    public boolean isActive() {
+        return this.status == AccountStatus.ACTIVE;
+    }
 
     public void depositAmount(BigDecimal amount) {
+
+        if (!isActive()) {
+            System.out.println("Can't deposit amount, account is not active.");
+            return;
+        }
 
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
             System.out.println("Invalid deposit amount");
@@ -31,6 +39,11 @@ public class Account {
 
 
     public void withdrawAmount(BigDecimal amount) {
+
+        if (!isActive()) {
+            System.out.println("Can't withdraw amount, account is not active.");
+            return;
+        }
 
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
             System.out.println("Invalid withdrawal amount");
