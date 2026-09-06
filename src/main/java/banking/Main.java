@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         //Create Bank
-        Bank bank = new Bank();
+        Bank bank = new Bank(new EmailNotification());
 
         //Create Address
         Address address = new Address(

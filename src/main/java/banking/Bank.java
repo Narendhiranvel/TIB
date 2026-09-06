@@ -12,7 +12,12 @@ public class Bank {
 
     private static int accountCounter = 100000;
 
-    public Bank() {
+    private NotificationService notificationService;
+
+    public Bank(NotificationService notificationService) {
+
+        this.notificationService = notificationService;
+
         customers = new ArrayList<>();
         accounts = new ArrayList<>();
     }
@@ -25,6 +30,10 @@ public class Bank {
         Customer customer = new Customer(name, dateOfBirth, phone, email, address);
 
         customers.add(customer);
+
+        notificationService.sendNotification(
+                "Your customer account has been registered successfully."
+        );
 
         System.out.println("Customer registered successfully.");
 
@@ -79,6 +88,10 @@ public class Bank {
         // Associate account with customer
         customer.addAccount(account);
 
+        notificationService.sendNotification(
+                "Your account has been created successfully."
+        );
+
         System.out.println("Account created successfully.");
 
         return account;
@@ -128,6 +141,10 @@ public class Bank {
         }
 
         account.setStatus(AccountStatus.CLOSED);
+
+        notificationService.sendNotification(
+                "Your account has been closed successfully"
+        );
 
         System.out.println("Account closed successfully.");
     }
