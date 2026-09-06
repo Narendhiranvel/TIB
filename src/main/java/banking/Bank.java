@@ -34,11 +34,45 @@ public class Bank {
     /**
      * Create a bank account for a customer
      */
-    public Account createAccount(Customer customer, AccountType accountType, BigDecimal openingBalance) {
+    public Account createAccount(Customer customer,
+                                 AccountType accountType,
+                                 BigDecimal openingBalance) {
 
         String accountNumber = String.valueOf(++accountCounter);
 
-        Account account = new Account(accountNumber, accountType, openingBalance, AccountStatus.ACTIVE);
+        Account account;
+
+        switch (accountType) {
+
+            case SAVINGS:
+                account = new SavingsAccount(
+                        accountNumber,
+                        openingBalance,
+                        AccountStatus.ACTIVE
+                );
+                break;
+
+            case CURRENT:
+                account = new CurrentAccount(
+                        accountNumber,
+                        openingBalance,
+                        AccountStatus.ACTIVE
+                );
+                break;
+
+            case BUSINESS:
+                account = new BusinessAccount(
+                        accountNumber,
+                        openingBalance,
+                        AccountStatus.ACTIVE
+                );
+                break;
+
+            default:
+                throw new IllegalArgumentException(
+                        "Unsupported account type: " + accountType
+                );
+        }
 
         accounts.add(account);
 

@@ -49,6 +49,11 @@ public class Main {
                 account.checkBalance()
         );
 
+//      can't withdraw amount - Minimum balance should be maintained
+        account.withdrawAmount(
+                new BigDecimal("5500")
+        );
+
         bank.closeAccount(account.getAccountNumber());
 
 //        Can't deposit after closing

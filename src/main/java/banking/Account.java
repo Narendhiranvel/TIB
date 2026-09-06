@@ -2,10 +2,10 @@ package banking;
 
 import java.math.BigDecimal;
 
-public class Account {
+public abstract class Account {
 
     private final String accountNumber;
-    private AccountType accountType;
+    private final AccountType accountType;
     private BigDecimal balance;
     private AccountStatus status;
 
@@ -18,52 +18,57 @@ public class Account {
         this.status = accountStatus;
     }
 
-    public boolean isActive() {
+    // Protected helper methods
+    protected boolean isActive() {
         return this.status == AccountStatus.ACTIVE;
     }
+
+    protected boolean isValidAmount(BigDecimal amount) {
+        return amount.compareTo(BigDecimal.ZERO) > 0;
+    }
+
+    protected boolean hasSufficientBalance(BigDecimal amount) {
+        return amount.compareTo(balance) <= 0;
+    }
+
+    protected void subtractBalance(BigDecimal amount) {
+        this.balance = this.balance.subtract(amount);
+    }
+
+    protected void addBalance(BigDecimal amount) {
+        this.balance = this.balance.add(amount);
+    }
+
+    // Common behaviour for all account types
 
     public void depositAmount(BigDecimal amount) {
 
         if (!isActive()) {
-            System.out.println("Can't deposit amount, account is not active.");
+            System.out.println(
+                    "Can't deposit amount, account is not active."
+            );
             return;
         }
 
-        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+        if (!isValidAmount(amount)) {
             System.out.println("Invalid deposit amount");
             return;
         }
 
-        this.balance = this.balance.add(amount);
+        addBalance(amount);
     }
 
+    // Abstract behaviour
+    // Every account type must define its own withdrawal rules
 
-    public void withdrawAmount(BigDecimal amount) {
-
-        if (!isActive()) {
-            System.out.println("Can't withdraw amount, account is not active.");
-            return;
-        }
-
-        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-            System.out.println("Invalid withdrawal amount");
-            return;
-        }
-
-        if (amount.compareTo(balance) > 0) {
-            System.out.println("Insufficient balance");
-            return;
-        }
-
-        this.balance = this.balance.subtract(amount);
-    }
-
+    public abstract void withdrawAmount(BigDecimal amount);
 
     public BigDecimal checkBalance() {
         return this.balance;
     }
 
     public void viewAccountDetails() {
+
         System.out.println("Account Number: " + accountNumber);
         System.out.println("Account Type: " + accountType);
         System.out.println("Balance: " + balance);
@@ -76,9 +81,5 @@ public class Account {
 
     public void setStatus(AccountStatus status) {
         this.status = status;
-    }
-
-    public void setAccountType(AccountType accountType) {
-        this.accountType = accountType;
     }
 }
