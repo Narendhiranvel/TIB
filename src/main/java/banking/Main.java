@@ -1,5 +1,12 @@
 package banking;
 
+import banking.enums.AccountType;
+import banking.model.Account;
+import banking.model.Address;
+import banking.model.Customer;
+import banking.notification.EmailNotification;
+import banking.service.Bank;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 

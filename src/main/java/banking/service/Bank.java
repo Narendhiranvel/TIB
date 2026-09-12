@@ -1,4 +1,9 @@
-package banking;
+package banking.service;
+
+import banking.enums.AccountStatus;
+import banking.enums.AccountType;
+import banking.model.*;
+import banking.notification.NotificationService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

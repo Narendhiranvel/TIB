@@ -1,4 +1,4 @@
-package banking;
+package banking.notification;
 
 public class SmsNotification implements NotificationService{
 

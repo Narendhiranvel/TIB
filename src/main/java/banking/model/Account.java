@@ -1,4 +1,7 @@
-package banking;
+package banking.model;
+
+import banking.enums.AccountStatus;
+import banking.enums.AccountType;
 
 import java.math.BigDecimal;
 
