@@ -7,12 +7,12 @@ import java.util.List;
 
 public class Bank {
 
-    private List<Customer> customers;
-    private List<Account> accounts;
+    private final List<Customer> customers;
+    private final List<Account> accounts;
 
     private static int accountCounter = 100000;
 
-    private NotificationService notificationService;
+    private final NotificationService notificationService;
 
     public Bank(NotificationService notificationService) {
 
