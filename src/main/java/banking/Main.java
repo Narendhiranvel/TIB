@@ -1,6 +1,7 @@
 package banking;
 
 import banking.enums.AccountType;
+import banking.exception.InsufficientBalanceException;
 import banking.model.Account;
 import banking.model.Address;
 import banking.model.Customer;
@@ -45,9 +46,12 @@ public class Main {
                 new BigDecimal("1000")
         );
 
-        account.withdrawAmount(
-                new BigDecimal("500")
-        );
+        // Can't withdraw - Insufficient balance
+        try {
+            account.withdrawAmount(new BigDecimal("6001.00"));
+        } catch (InsufficientBalanceException e) {
+            System.out.println(e.getMessage());
+        }
 
         customer.viewProfile();
 

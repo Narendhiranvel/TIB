@@ -2,6 +2,7 @@ package banking.model;
 
 import banking.enums.AccountStatus;
 import banking.enums.AccountType;
+import banking.exception.InsufficientBalanceException;
 
 import java.math.BigDecimal;
 
@@ -30,8 +31,9 @@ public class SavingsAccount extends Account{
         }
 
         if (!hasSufficientBalance(amount)) {
-            System.out.println("Insufficient balance");
-            return;
+            throw new InsufficientBalanceException(
+                    "Insufficient balance"
+            );
         }
 
         BigDecimal remainingBalance =

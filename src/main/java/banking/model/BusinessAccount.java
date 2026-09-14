@@ -2,13 +2,14 @@ package banking.model;
 
 import banking.enums.AccountStatus;
 import banking.enums.AccountType;
+import banking.exception.InsufficientBalanceException;
 
 import java.math.BigDecimal;
 
-public class BusinessAccount extends Account{
+public class BusinessAccount extends Account {
 
     private static final BigDecimal MINIMUM_BALANCE = new BigDecimal("2000.00");
-    private static final BigDecimal BUSINESS_ACCOUNT_INTEREST  = new BigDecimal("3.00");
+    private static final BigDecimal BUSINESS_ACCOUNT_INTEREST = new BigDecimal("3.00");
 
     public BusinessAccount(String accountNumber, BigDecimal balance, AccountStatus accountStatus) {
         super(accountNumber, AccountType.BUSINESS, balance, accountStatus);
@@ -30,8 +31,9 @@ public class BusinessAccount extends Account{
         }
 
         if (!hasSufficientBalance(amount)) {
-            System.out.println("Insufficient balance");
-            return;
+            throw new InsufficientBalanceException(
+                    "Insufficient balance"
+            );
         }
 
         BigDecimal remainingBalance =
