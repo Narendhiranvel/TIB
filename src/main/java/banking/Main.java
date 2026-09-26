@@ -1,6 +1,7 @@
 package banking;
 
 import banking.enums.AccountType;
+import banking.exception.InActiveAccountException;
 import banking.exception.InsufficientBalanceException;
 import banking.model.Account;
 import banking.model.Address;
@@ -70,14 +71,18 @@ public class Main {
         bank.closeAccount(account.getAccountNumber());
 
 //        Can't deposit after closing
-        account.depositAmount(
-                new BigDecimal("1000")
-        );
+        try {
+            account.depositAmount(new BigDecimal("1000"));
+        } catch (InActiveAccountException e) {
+            System.out.println(e.getMessage());
+        }
 
 //        Can't withdraw after closing
-        account.withdrawAmount(
-                new BigDecimal("500")
-        );
+        try {
+            account.withdrawAmount(new BigDecimal("500"));
+        } catch (InActiveAccountException e) {
+            System.out.println(e.getMessage());
+        }
 
         customer.viewProfile();
 
@@ -138,14 +143,18 @@ public class Main {
         bank2.closeAccount(account2.getAccountNumber());
 
 //        Can't deposit after closing
-        account2.depositAmount(
-                new BigDecimal("1000")
-        );
+        try {
+            account.depositAmount(new BigDecimal("1000"));
+        } catch (InActiveAccountException e) {
+            System.out.println(e.getMessage());
+        }
 
 //        Can't withdraw after closing
-        account2.withdrawAmount(
-                new BigDecimal("500")
-        );
+        try {
+            account.withdrawAmount(new BigDecimal("500"));
+        } catch (InActiveAccountException e) {
+            System.out.println(e.getMessage());
+        }
 
         customer2.viewProfile();
     }

@@ -2,6 +2,7 @@ package banking.model;
 
 import banking.enums.AccountStatus;
 import banking.enums.AccountType;
+import banking.exception.InActiveAccountException;
 import banking.exception.InsufficientBalanceException;
 
 import java.math.BigDecimal;
@@ -19,10 +20,9 @@ public class SavingsAccount extends Account{
     public void withdrawAmount(BigDecimal amount) {
 
         if (!isActive()) {
-            System.out.println(
-                    "Can't withdraw amount, account is not active."
+            throw new InActiveAccountException(
+                    "Can't withdraw Your Savings account is not Active"
             );
-            return;
         }
 
         if (!isValidAmount(amount)) {

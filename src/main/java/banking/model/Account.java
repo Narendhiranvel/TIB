@@ -2,6 +2,7 @@ package banking.model;
 
 import banking.enums.AccountStatus;
 import banking.enums.AccountType;
+import banking.exception.InActiveAccountException;
 
 import java.math.BigDecimal;
 
@@ -47,10 +48,9 @@ public abstract class Account {
     public void depositAmount(BigDecimal amount) {
 
         if (!isActive()) {
-            System.out.println(
-                    "Can't deposit amount, account is not active."
+            throw new InActiveAccountException(
+                    "Can't deposit, Your account is not Active"
             );
-            return;
         }
 
         if (!isValidAmount(amount)) {
