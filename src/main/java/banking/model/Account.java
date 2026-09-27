@@ -122,6 +122,5 @@ public abstract class Account {
         );
 
         addTransaction(transaction);
-        transaction.printTransaction();
     }
 }

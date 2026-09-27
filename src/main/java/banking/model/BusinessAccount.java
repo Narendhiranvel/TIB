@@ -59,6 +59,5 @@ public class BusinessAccount extends Account {
         );
 
         addTransaction(transaction);
-        transaction.printTransaction();
     }
 }

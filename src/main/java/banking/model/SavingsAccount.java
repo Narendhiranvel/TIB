@@ -60,6 +60,5 @@ public class SavingsAccount extends Account{
         );
 
         addTransaction(transaction);
-        transaction.printTransaction();
     }
 }

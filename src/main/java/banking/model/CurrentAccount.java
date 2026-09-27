@@ -50,6 +50,5 @@ public class CurrentAccount extends Account{
         );
 
         addTransaction(transaction);
-        transaction.printTransaction();
     }
 }
