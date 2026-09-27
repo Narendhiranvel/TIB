@@ -17,6 +17,7 @@ public abstract class Account {
     private BigDecimal balance;
     private AccountStatus status;
 
+//    Account can have multiple transactions
     private final List<Transaction> transactionDetails;
 
 
@@ -28,7 +29,7 @@ public abstract class Account {
         this.status = accountStatus;
         this.transactionDetails = new ArrayList<>();
     }
-
+//    Protected helper method to add transaction to the list
     protected void addTransaction(Transaction transaction){
         transactionDetails.add(transaction);
     }
@@ -71,6 +72,7 @@ public abstract class Account {
 
         addBalance(amount);
 
+        // Create a transaction record for the deposit
         Transaction transaction = new Transaction(
                 accountNumber,
                 TransactionType.DEPOSIT,
@@ -106,5 +108,20 @@ public abstract class Account {
 
     public void setStatus(AccountStatus status) {
         this.status = status;
+    }
+
+    // Method to record the opening balance as a transaction
+    public void recordOpeningBalance() {
+
+        Transaction transaction = new Transaction(
+                accountNumber,
+                TransactionType.OPENING_BALANCE,
+                balance,
+                balance,
+                LocalDateTime.now()
+        );
+
+        addTransaction(transaction);
+        transaction.printTransaction();
     }
 }

@@ -2,10 +2,12 @@ package banking.model;
 
 import banking.enums.AccountStatus;
 import banking.enums.AccountType;
+import banking.enums.TransactionType;
 import banking.exception.InActiveAccountException;
 import banking.exception.InsufficientBalanceException;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class SavingsAccount extends Account{
 
@@ -47,5 +49,17 @@ public class SavingsAccount extends Account{
         }
 
         subtractBalance(amount);
+
+        // Create a transaction for the withdrawal
+        Transaction transaction = new Transaction(
+                getAccountNumber(),
+                TransactionType.WITHDRAWAL,
+                amount,
+                checkBalance(),
+                LocalDateTime.now()
+        );
+
+        addTransaction(transaction);
+        transaction.printTransaction();
     }
 }

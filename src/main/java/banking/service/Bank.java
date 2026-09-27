@@ -93,6 +93,9 @@ public class Bank {
         // Associate account with customer
         customer.addAccount(account);
 
+        // Record the opening balance as a transaction
+        account.recordOpeningBalance();
+
         notificationService.sendNotification(
                 "Your account has been created successfully."
         );
