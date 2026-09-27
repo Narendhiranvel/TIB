@@ -2,9 +2,13 @@ package banking.model;
 
 import banking.enums.AccountStatus;
 import banking.enums.AccountType;
+import banking.enums.TransactionType;
 import banking.exception.InActiveAccountException;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Account {
 
@@ -13,6 +17,8 @@ public abstract class Account {
     private BigDecimal balance;
     private AccountStatus status;
 
+    private final List<Transaction> transactionDetails;
+
 
     public Account(String accountNumber, AccountType accountType, BigDecimal balance, AccountStatus accountStatus) {
 
@@ -20,6 +26,11 @@ public abstract class Account {
         this.accountType = accountType;
         this.balance = balance;
         this.status = accountStatus;
+        this.transactionDetails = new ArrayList<>();
+    }
+
+    protected void addTransaction(Transaction transaction){
+        transactionDetails.add(transaction);
     }
 
     // Protected helper methods
@@ -59,6 +70,17 @@ public abstract class Account {
         }
 
         addBalance(amount);
+
+        Transaction transaction = new Transaction(
+                accountNumber,
+                TransactionType.DEPOSIT,
+                amount,
+                balance,
+                LocalDateTime.now()
+        );
+
+        addTransaction(transaction);
+        transaction.printTransaction();
     }
 
     // Abstract behaviour
