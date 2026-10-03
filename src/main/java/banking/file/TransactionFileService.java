@@ -37,7 +37,7 @@ public class TransactionFileService {
                 transaction.getAccountNumber() + "," +
                 transaction.getTransactionType() + "," +
                 transaction.getAmount() + "," +
-                transaction.getBalance() + "," +
+                transaction.getBalanceAfterTransaction() + "," +
                 transaction.getTransactionDateTime() +
                 System.lineSeparator();
 

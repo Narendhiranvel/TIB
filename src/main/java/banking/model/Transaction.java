@@ -55,7 +55,7 @@ public class Transaction {
         return amount;
     }
 
-    public BigDecimal getBalance() {
+    public BigDecimal getBalanceAfterTransaction() {
         return balanceAfterTransaction;
     }
 
