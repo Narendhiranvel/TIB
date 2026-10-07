@@ -5,6 +5,7 @@ import banking.enums.AccountType;
 import banking.enums.TransactionType;
 import banking.exception.InActiveAccountException;
 import banking.exception.InsufficientBalanceException;
+import banking.repository.TransactionRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -12,9 +13,10 @@ import java.time.LocalDateTime;
 public class CurrentAccount extends Account{
 
     private static final BigDecimal OVERDRAFT_AMOUNT = new BigDecimal("1000.00");
+    TransactionRepository transactionRepository;
 
-    public CurrentAccount(String accountNumber, BigDecimal balance, AccountStatus accountStatus) {
-        super(accountNumber, AccountType.CURRENT, balance, accountStatus);
+    public CurrentAccount(String accountNumber, BigDecimal balance, AccountStatus accountStatus, TransactionRepository transactionRepository) {
+        super(accountNumber, AccountType.CURRENT, balance, accountStatus, transactionRepository);
     }
 
     @Override

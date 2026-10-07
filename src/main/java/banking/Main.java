@@ -3,11 +3,13 @@ package banking;
 import banking.enums.AccountType;
 import banking.exception.InActiveAccountException;
 import banking.exception.InsufficientBalanceException;
+import banking.file.TransactionFileService;
 import banking.model.Account;
 import banking.model.Address;
 import banking.model.Customer;
 import banking.notification.EmailNotification;
-import banking.notification.SmsNotification;
+import banking.notification.NotificationService;
+import banking.repository.TransactionRepository;
 import banking.service.Bank;
 
 import java.math.BigDecimal;
@@ -17,8 +19,15 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println("---------------------------SAVINGS ACCOUNT---------------------------------");
+
+        NotificationService notificationService =
+                new EmailNotification();
+
+        TransactionRepository transactionRepository =
+                new TransactionFileService();
+
         //Create Bank
-        Bank bank = new Bank(new EmailNotification());
+        Bank bank = new Bank(notificationService, transactionRepository);
 
         //Create Address
         Address address = new Address(
@@ -90,7 +99,7 @@ public class Main {
         System.out.println("---------------------------BUSINESS ACCOUNT---------------------------------");
 
         //Create Bank
-        Bank bank2 = new Bank(new SmsNotification());
+        Bank bank2 = new Bank(notificationService, transactionRepository);
 
         //Create Address
         Address address2 = new Address(

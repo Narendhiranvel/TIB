@@ -4,6 +4,7 @@ import banking.enums.AccountStatus;
 import banking.enums.AccountType;
 import banking.enums.TransactionType;
 import banking.exception.InActiveAccountException;
+import banking.repository.TransactionRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -20,18 +21,26 @@ public abstract class Account {
 //    Account can have multiple transactions
     private final List<Transaction> transactionDetails;
 
+    private final TransactionRepository transactionRepository;
 
-    public Account(String accountNumber, AccountType accountType, BigDecimal balance, AccountStatus accountStatus) {
+
+    public Account(String accountNumber,
+                   AccountType accountType,
+                   BigDecimal balance,
+                   AccountStatus accountStatus,
+                   TransactionRepository transactionRepository) {
 
         this.accountNumber = accountNumber;
         this.accountType = accountType;
         this.balance = balance;
         this.status = accountStatus;
         this.transactionDetails = new ArrayList<>();
+        this.transactionRepository = transactionRepository;
     }
 //    Protected helper method to add transaction to the list
     protected void addTransaction(Transaction transaction){
         transactionDetails.add(transaction);
+        transactionRepository.save(transaction);
     }
 
     // Protected helper methods

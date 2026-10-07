@@ -5,6 +5,7 @@ import banking.enums.AccountType;
 import banking.enums.TransactionType;
 import banking.exception.InActiveAccountException;
 import banking.exception.InsufficientBalanceException;
+import banking.repository.TransactionRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -13,9 +14,10 @@ public class SavingsAccount extends Account{
 
     private static final BigDecimal MINIMUM_BALANCE = new BigDecimal("500.00");
     private static final BigDecimal SAVINGS_ACCOUNT_INTEREST  = new BigDecimal("0.5");
+    TransactionRepository transactionRepository;
 
-    public SavingsAccount(String accountNumber, BigDecimal balance, AccountStatus accountStatus) {
-        super(accountNumber, AccountType.SAVINGS, balance, accountStatus);
+    public SavingsAccount(String accountNumber, BigDecimal balance, AccountStatus accountStatus, TransactionRepository transactionRepository) {
+        super(accountNumber, AccountType.SAVINGS, balance, accountStatus, transactionRepository);
     }
 
     @Override

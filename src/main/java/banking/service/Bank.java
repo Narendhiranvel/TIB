@@ -4,6 +4,7 @@ import banking.enums.AccountStatus;
 import banking.enums.AccountType;
 import banking.model.*;
 import banking.notification.NotificationService;
+import banking.repository.TransactionRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -19,9 +20,12 @@ public class Bank {
 
     private final NotificationService notificationService;
 
-    public Bank(NotificationService notificationService) {
+    private final TransactionRepository transactionRepository;
+
+    public Bank(NotificationService notificationService, TransactionRepository transactionRepository) {
 
         this.notificationService = notificationService;
+        this.transactionRepository = transactionRepository;
 
         customers = new ArrayList<>();
         accounts = new ArrayList<>();
@@ -62,7 +66,8 @@ public class Bank {
                 account = new SavingsAccount(
                         accountNumber,
                         openingBalance,
-                        AccountStatus.ACTIVE
+                        AccountStatus.ACTIVE,
+                        transactionRepository
                 );
                 break;
 
@@ -70,7 +75,8 @@ public class Bank {
                 account = new CurrentAccount(
                         accountNumber,
                         openingBalance,
-                        AccountStatus.ACTIVE
+                        AccountStatus.ACTIVE,
+                        transactionRepository
                 );
                 break;
 
@@ -78,7 +84,8 @@ public class Bank {
                 account = new BusinessAccount(
                         accountNumber,
                         openingBalance,
-                        AccountStatus.ACTIVE
+                        AccountStatus.ACTIVE,
+                        transactionRepository
                 );
                 break;
 

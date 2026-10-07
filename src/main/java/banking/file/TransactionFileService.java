@@ -1,6 +1,7 @@
 package banking.file;
 
 import banking.model.Transaction;
+import banking.repository.TransactionRepository;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 
-public class TransactionFileService {
+public class TransactionFileService implements TransactionRepository {
 
     private final Path transactionDirectory;
 
@@ -52,5 +53,10 @@ public class TransactionFileService {
         } catch (IOException e) {
             System.out.println("Failed to write transaction: " + e.getMessage());
         }
+    }
+
+    @Override
+    public void save(Transaction transaction) {
+        writeTransactionToFile(transaction);
     }
 }
