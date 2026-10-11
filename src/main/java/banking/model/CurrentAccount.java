@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 public class CurrentAccount extends Account{
 
     private static final BigDecimal OVERDRAFT_AMOUNT = new BigDecimal("1000.00");
-    TransactionRepository transactionRepository;
 
     public CurrentAccount(String accountNumber, BigDecimal balance, AccountStatus accountStatus, TransactionRepository transactionRepository) {
         super(accountNumber, AccountType.CURRENT, balance, accountStatus, transactionRepository);

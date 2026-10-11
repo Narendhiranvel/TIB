@@ -14,7 +14,6 @@ public class SavingsAccount extends Account{
 
     private static final BigDecimal MINIMUM_BALANCE = new BigDecimal("500.00");
     private static final BigDecimal SAVINGS_ACCOUNT_INTEREST  = new BigDecimal("0.5");
-    TransactionRepository transactionRepository;
 
     public SavingsAccount(String accountNumber, BigDecimal balance, AccountStatus accountStatus, TransactionRepository transactionRepository) {
         super(accountNumber, AccountType.SAVINGS, balance, accountStatus, transactionRepository);

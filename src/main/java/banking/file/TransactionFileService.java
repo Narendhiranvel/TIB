@@ -21,7 +21,9 @@ public class TransactionFileService implements TransactionRepository {
         try {
             Files.createDirectories(transactionDirectory);
         } catch (IOException e) {
-            System.out.println("Failed to create transaction directory: " + e.getMessage());
+            System.out.println(
+                    "Failed to create transaction directory: " + e.getMessage()
+            );
         }
     }
 
@@ -57,6 +59,7 @@ public class TransactionFileService implements TransactionRepository {
 
     @Override
     public void save(Transaction transaction) {
+        createTransactionDirectory();
         writeTransactionToFile(transaction);
     }
 }

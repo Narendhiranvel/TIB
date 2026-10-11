@@ -14,7 +14,6 @@ public class BusinessAccount extends Account {
 
     private static final BigDecimal MINIMUM_BALANCE = new BigDecimal("2000.00");
     private static final BigDecimal BUSINESS_ACCOUNT_INTEREST = new BigDecimal("3.00");
-    TransactionRepository transactionRepository;
 
     public BusinessAccount(String accountNumber, BigDecimal balance, AccountStatus accountStatus, TransactionRepository transactionRepository) {
         super(accountNumber, AccountType.BUSINESS, balance, accountStatus, transactionRepository);
