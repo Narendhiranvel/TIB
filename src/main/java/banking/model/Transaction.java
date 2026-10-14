@@ -26,6 +26,22 @@ public class Transaction {
         this.transactionDateTime = transactionDateTime;
     }
 
+    public Transaction(
+            String transactionId,
+            String accountNumber,
+            TransactionType transactionType,
+            BigDecimal amount,
+            BigDecimal balanceAfterTransaction,
+            LocalDateTime transactionDateTime) {
+
+        this.transactionId = transactionId;
+        this.accountNumber = accountNumber;
+        this.transactionType = transactionType;
+        this.amount = amount;
+        this.balanceAfterTransaction = balanceAfterTransaction;
+        this.transactionDateTime = transactionDateTime;
+    }
+
     public void printTransaction() {
         System.out.println("Transaction ID: " + transactionId);
         System.out.println("Account Number: " + accountNumber);
